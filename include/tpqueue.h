@@ -7,7 +7,8 @@ class TPQueue {
   struct Node {
     T data;
     Node* next;
-    explicit Node(const T& data, Node* next = nullptr) : data(data), next(next) {}
+    explicit Node(const T& data, Node* next = nullptr) 
+        : data(data), next(next) {}
   };
 
   Node* head;
@@ -16,6 +17,7 @@ class TPQueue {
 
  public:
   TPQueue() : head(nullptr), tail(nullptr), size(0) {}
+  
   ~TPQueue() {
     while (head) {
       Node* temp = head;
@@ -30,52 +32,41 @@ class TPQueue {
     if (!head || item.prior > head->data.prior) {
       newNode->next = head;
       head = newNode;
-      if (!tail) {
-        tail = head;
-      }
+      if (!tail) tail = head;
       size++;
       return;
     }
 
     Node* current = head;
-    while (current->next && current->next->data.prior >= item.prior) {
+    while (current->next && 
+           current->next->data.prior >= item.prior) {
       current = current->next;
     }
 
     newNode->next = current->next;
     current->next = newNode;
 
-    if (!newNode->next) {
-      tail = newNode;
-    }
+    if (!newNode->next) tail = newNode;
 
     size++;
   }
 
   T pop() {
-    if (!head) {
-      throw "Queue is empty";
-    }
+    if (!head) throw "Queue is empty";
 
     Node* temp = head;
     T data = head->data;
     head = head->next;
 
-    if (!head) {
-      tail = nullptr;
-    }
+    if (!head) tail = nullptr;
 
     delete temp;
     size--;
     return data;
   }
 
-  bool isEmpty() const {
-    return size == 0;
-  }
+  bool isEmpty() const { return size == 0; }
 
-  int getSize() const {
-    return size;
-  }
+  int getSize() const { return size; }
 };
 #endif  // INCLUDE_TPQUEUE_H_
