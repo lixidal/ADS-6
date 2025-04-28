@@ -17,6 +17,7 @@ class TPQueue {
   Node* head;
   Node* tail;
   int size;
+
  public:
   TPQueue() : head(nullptr), tail(nullptr), size(0) {}
   ~TPQueue() {
