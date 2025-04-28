@@ -7,7 +7,7 @@ class TPQueue {
   struct Node {
     T data;
     Node* next;
-    explicit Node(const T& data, Node* next = nullptr) 
+    explicit Node(const T& data, Node* next = nullptr)
         : data(data), next(next) {}
   };
 
@@ -17,7 +17,6 @@ class TPQueue {
 
  public:
   TPQueue() : head(nullptr), tail(nullptr), size(0) {}
-  
   ~TPQueue() {
     while (head) {
       Node* temp = head;
@@ -38,16 +37,13 @@ class TPQueue {
     }
 
     Node* current = head;
-    while (current->next && 
+    while (current->next &&
            current->next->data.prior >= item.prior) {
       current = current->next;
     }
-
     newNode->next = current->next;
     current->next = newNode;
-
     if (!newNode->next) tail = newNode;
-
     size++;
   }
 
@@ -57,16 +53,13 @@ class TPQueue {
     Node* temp = head;
     T data = head->data;
     head = head->next;
-
     if (!head) tail = nullptr;
-
     delete temp;
     size--;
     return data;
   }
 
   bool isEmpty() const { return size == 0; }
-
   int getSize() const { return size; }
 };
 #endif  // INCLUDE_TPQUEUE_H_
